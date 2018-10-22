@@ -1,4 +1,5 @@
 <?php
+
     namespace Wareki_API;
 
     class Wareki {
@@ -21,10 +22,10 @@
             ],
         ];
 
-        /** @var array DUPLICATE 二つの元号に属する日付 */
+        /** @var array DUPLICATE 二つの元号に属する日付。新しい方の元年とする */
         public const DUPLICATE = [
-            "1912-07-30" => "明治・大正",
-            "1926-12-25" => "大正・昭和",
+            "1912-07-30" => "大正",
+            "1926-12-25" => "昭和",
         ];
 
         /** @var string $gengou 元号 */
@@ -57,7 +58,7 @@
                 $this->setMonth(4);
                 $this->setDate(1);
             } else {
-                throw new \InvalidArgumentException("$wareki is not valid format.");
+                throw new \InvalidArgumentException("$wareki is not a valid format.");
             }
         }
 
@@ -135,6 +136,14 @@
                 throw new \InvalidArgumentException("$date is out of bound.");
             }
             $this->date = $date;
+        }
+
+        public function __toString() {
+            return self::stringfy($this->getGengou(), $this->getYear(), $this->getMonth(), $this->getDate());
+        }
+
+        private static function stringfy(string $gengou, int $year, int $month, int $date) {
+            return $gengou . $year . "年" . $month . "月" . $date . "日";
         }
 
         /**
@@ -223,7 +232,7 @@
             /** @var int $year その西暦がその元号で何年か */
             $year = $seireki->getYear() - $start_seireki->getYear() + 1;
 
-            return new Wareki($gengou . $year . "年" . $seireki->getMonth() . "月" . $seireki->getDate() . "日");
+            return new Wareki(self::stringfy($gengou, $year, $seireki->getMonth(), $seireki->getDate()));
         }
 
         /**
