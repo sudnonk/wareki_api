@@ -1,4 +1,5 @@
 <?php
+
     namespace Wareki_API;
 
     class Seireki {
@@ -104,7 +105,7 @@
         private static function stringfy(int $year, int $month, int $date) {
             return $year . "-" .
                 str_pad($month, 2, "0", STR_PAD_LEFT) . "-" .
-                str_pad($date, 2, "0");
+                str_pad($date, 2, "0", STR_PAD_LEFT);
         }
 
         /**
