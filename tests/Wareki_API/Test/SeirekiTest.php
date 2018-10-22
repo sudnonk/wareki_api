@@ -11,6 +11,9 @@
          */
         function construct_正常系() {
             new Seireki("2018-04-01");
+            new Seireki("2018-4-1");
+            new Seireki("2018-04-1");
+            new Seireki("2018-4-01");
             self::assertTrue(true);
         }
 
@@ -140,20 +143,5 @@
         function wareki2seireki_正常系() {
             $seireki = Seireki::wareki2seireki(new Wareki("平成30年04月1日"));
             self::assertEquals("2018-04-01", $seireki->__toString());
-        }
-
-        /**
-         * @test
-         *
-         * @throws \ReflectionException
-         */
-        function stringfy() {
-            $seireki = new Seireki("2018-04-01");
-
-            $reflection = new \ReflectionClass($seireki);
-            $method = $reflection->getMethod('stringfy');
-            $method->setAccessible(true);
-
-            self::assertEquals("2018-04-01", $method->invoke($seireki, 2018, 4, 1));
         }
     }

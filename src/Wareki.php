@@ -174,7 +174,7 @@
                     if ($compare_start === 0 || $compare_end === 0) {
                         //始まりか終わりと等しい
                         return $gengou;
-                    } elseif ($compare_start > 0 && $compare_end < 0) {
+                    } elseif ($compare_start < 0 && $compare_end < 0) {
                         //始まりと終わりの間
                         return $gengou;
                     } else {
@@ -187,7 +187,7 @@
                     if ($compare_start === 0) {
                         //始まりと等しい
                         return $gengou;
-                    } elseif ($compare_start > 0) {
+                    } elseif ($compare_start < 0) {
                         //始まりより大きい
                         return $gengou;
                     } else {
@@ -246,8 +246,7 @@
         public static function compare(Wareki $a, Wareki $b): int {
             $gengous = array_keys(self::GENGOU);
             $gengous = array_values($gengous);
-
-            $gengou = array_search($a, $gengous) <=> array_search($b, $gengous);
+            $gengou = array_search($a->getGengou(), $gengous,true) <=> array_search($b->getGengou(), $gengous,true);
             if ($gengou !== 0) {
                 return $gengou;
             }
