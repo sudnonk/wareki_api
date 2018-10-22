@@ -65,7 +65,7 @@
          * @throws \InvalidArgumentException
          */
         private function setMonth(int $month): void {
-            if ($month <= 1 || $month >= 12) {
+            if ($month < 1 || $month > 12) {
                 throw new \InvalidArgumentException("$month is out of bound.");
             }
             $this->month = $month;
@@ -84,7 +84,7 @@
          * @throws \InvalidArgumentException
          */
         private function setDate(int $date): void {
-            if ($date <= 1 || $date >= 31) {
+            if ($date < 1 || $date > 31) {
                 throw new \InvalidArgumentException("$date is out of bound.");
             }
             $this->date = $date;
@@ -134,12 +134,12 @@
          */
         public static function compare(Seireki $a, Seireki $b): int {
             $year = ($a->getYear() <=> $b->getYear());
-            if ($year === 0) {
+            if ($year !== 0) {
                 return $year;
             }
 
             $month = ($a->getMonth() <=> $b->getMonth());
-            if ($month === 0) {
+            if ($month !== 0) {
                 return $month;
             }
 
