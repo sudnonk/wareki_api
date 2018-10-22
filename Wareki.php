@@ -1,4 +1,5 @@
 <?php
+    namespace Wareki_API;
 
     class Wareki {
         /** @var array GENGOU 元号のリストとその終始 */
@@ -40,7 +41,7 @@
          *
          * @param string $wareki
          *
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         public function __construct(string $wareki) {
             $m = [];
@@ -56,7 +57,7 @@
                 $this->setMonth(4);
                 $this->setDate(1);
             } else {
-                throw new InvalidArgumentException("$wareki is not valid format.");
+                throw new \InvalidArgumentException("$wareki is not valid format.");
             }
         }
 
@@ -70,11 +71,11 @@
         /**
          * @param string $gengo
          *
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         private function setGengo(string $gengo): void {
             if (!in_array($gengo, array_keys(self::GENGOU), true)) {
-                throw new InvalidArgumentException("$gengo does not exists.");
+                throw new \InvalidArgumentException("$gengo does not exists.");
             }
             $this->gengou = $gengo;
         }
@@ -89,11 +90,11 @@
         /**
          * @param int $year
          *
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         private function setYear(int $year): void {
             if ($year < 0) {
-                throw new InvalidArgumentException("Year must be a positive value.");
+                throw new \InvalidArgumentException("Year must be a positive value.");
             }
             $this->year = $year;
         }
@@ -108,11 +109,11 @@
         /**
          * @param int $month
          *
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         private function setMonth(int $month): void {
             if ($month <= 1 || $month >= 12) {
-                throw new InvalidArgumentException("$month is out of bound.");
+                throw new \InvalidArgumentException("$month is out of bound.");
             }
             $this->month = $month;
         }
@@ -127,11 +128,11 @@
         /**
          * @param int $date
          *
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         private function setDate(int $date): void {
             if ($date <= 1 || $date >= 31) {
-                throw new InvalidArgumentException("$date is out of bound.");
+                throw new \InvalidArgumentException("$date is out of bound.");
             }
             $this->date = $date;
         }
@@ -142,7 +143,7 @@
          * @param Seireki $seireki
          *
          * @return string
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         private static function seireki2gengou(Seireki $seireki): string {
             /**
@@ -187,7 +188,7 @@
                 }
             }
 
-            throw new InvalidArgumentException("$seireki is out of bound.");
+            throw new \InvalidArgumentException("$seireki is out of bound.");
         }
 
         /**
@@ -207,7 +208,7 @@
          * @param Seireki $seireki
          *
          * @return Wareki
-         * @throws InvalidArgumentException
+         * @throws \InvalidArgumentException
          */
         public static function seireki2wareki(Seireki $seireki): Wareki {
             /** @var string $gengou その西暦に対応する元号 */

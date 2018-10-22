@@ -1,4 +1,8 @@
 <?php
+    require_once __DIR__ . "/../vendor/autoload.php";
+
+    use Wareki_API\Wareki;
+    use Wareki_API\Seireki;
 
     $wareki = filter_input(INPUT_GET, "wareki");
     $seireki = filter_input(INPUT_GET, "seireki");

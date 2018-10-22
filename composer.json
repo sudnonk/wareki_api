@@ -13,5 +13,10 @@
             "name": "sudnonk",
             "email": "sudnonk12@yahoo.co.jp"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wareki_API\\": "/"
+        }
+    }
 }
