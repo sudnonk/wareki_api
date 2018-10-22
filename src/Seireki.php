@@ -29,7 +29,7 @@
                 $this->setMonth(4);
                 $this->setDate(1);
             } else {
-                throw new \InvalidArgumentException("$seireki is not valid format.");
+                throw new \InvalidArgumentException("$seireki is not a valid format.");
             }
         }
 
@@ -120,7 +120,7 @@
             $start = new Seireki(Wareki::GENGOU[$wareki->getGengou()][0]);
 
             /** @var int $year その和暦の年を西暦にしたもの */
-            $year = $start->getYear() + $wareki->getYear();
+            $year = $start->getYear() + $wareki->getYear() - 1;
 
             return new Seireki(self::stringfy($year, $wareki->getMonth(), $wareki->getDate()));
         }

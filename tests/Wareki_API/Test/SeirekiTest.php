@@ -3,6 +3,7 @@
     namespace Wareki_API\Test;
 
     use Wareki_API\Seireki;
+    use Wareki_API\Wareki;
 
     class SeirekiTest extends \PHPUnit\Framework\TestCase {
         /**
@@ -55,15 +56,6 @@
          */
         function construct_日が大きい() {
             new Seireki("2018-04-32");
-        }
-
-        /**
-         * @test
-         * @expectedException \InvalidArgumentException
-         * @expectedExceptionMessage 20180401 is not a valid format.
-         */
-        function construct_値が不正() {
-            new Seireki("20180401");
         }
 
         /**
@@ -144,6 +136,14 @@
 
         /**
          * @test
+         */
+        function wareki2seireki_正常系() {
+            $seireki = Seireki::wareki2seireki(new Wareki("平成30年04月1日"));
+            self::assertEquals("2018-04-01", $seireki->__toString());
+        }
+
+        /**
+         * @test
          *
          * @throws \ReflectionException
          */
@@ -154,6 +154,6 @@
             $method = $reflection->getMethod('stringfy');
             $method->setAccessible(true);
 
-            self::assertEquals("2018-04-01", $method->invoke($seireki));
+            self::assertEquals("2018-04-01", $method->invoke($seireki, 2018, 4, 1));
         }
     }

@@ -221,7 +221,7 @@
             /** @var Seireki $start_seireki その元号が始まる西暦 */
             $start_seireki = new Seireki(self::GENGOU[$gengou][0]);
             /** @var int $year その西暦がその元号で何年か */
-            $year = $seireki->getYear() - $start_seireki->getYear();
+            $year = $seireki->getYear() - $start_seireki->getYear() + 1;
 
             return new Wareki($gengou . $year . "年" . $seireki->getMonth() . "月" . $seireki->getDate() . "日");
         }
