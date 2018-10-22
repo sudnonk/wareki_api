@@ -195,6 +195,16 @@
 
         /**
          * @test
+         */
+        function seireki2wareki_境界値(){
+            $wareki = Wareki::seireki2wareki(new Seireki("1989-01-07"));
+            self::assertEquals("昭和64年1月7日",$wareki->__toString());
+            $wareki = Wareki::seireki2wareki(new Seireki("1989-01-08"));
+            self::assertEquals("平成1年1月8日",$wareki->__toString());
+        }
+
+        /**
+         * @test
          *
          * @expectedException \InvalidArgumentException
          */
