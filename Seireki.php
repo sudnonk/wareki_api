@@ -1,10 +1,5 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: 志渡澤　優樹
-     * Date: 2018/10/22
-     * Time: 19:08
-     */
+
 
     class Seireki {
         /** @var int 年 */

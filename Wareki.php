@@ -1,10 +1,4 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: 志渡澤　優樹
-     * Date: 2018/10/22
-     * Time: 19:04
-     */
 
     class Wareki {
         /** @var array GENGOU 元号のリストとその終始 */
