@@ -7,6 +7,7 @@
 
     namespace Wareki_API\Test;
 
+    use Wareki_API\Config;
     use Wareki_API\Seireki;
     use Wareki_API\Wareki;
     use PHPUnit\Framework\TestCase;
@@ -120,8 +121,8 @@
             $wareki = new Wareki("平成30年");
             self::assertEquals("平成", $wareki->getGengou());
             self::assertEquals(30, $wareki->getYear());
-            self::assertEquals(4, $wareki->getMonth());
-            self::assertEquals(1, $wareki->getDate());
+            self::assertEquals(Config::DEFAULT_MONTH, $wareki->getMonth());
+            self::assertEquals(Config::DEFAULT_DATE, $wareki->getDate());
         }
 
         /**

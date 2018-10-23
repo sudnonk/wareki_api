@@ -26,8 +26,8 @@
                 $this->setDate(intval($m[3]));
             } elseif (preg_match("/^(\d+)$/u", $seireki, $m) === 1) {//2018の形式で指定されたとき
                 $this->setYear(intval($m[1]));
-                $this->setMonth(4);
-                $this->setDate(1);
+                $this->setMonth(Config::DEFAULT_MONTH);
+                $this->setDate(Config::DEFAULT_DATE);
             } else {
                 throw new \InvalidArgumentException("$seireki is not a valid format.");
             }

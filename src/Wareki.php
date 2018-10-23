@@ -55,8 +55,8 @@
             } elseif (preg_match("/^(\D+)(\d+)年$/u", $wareki, $m) === 1) {
                 $this->setGengo($m[1]);
                 $this->setYear($m[2]);
-                $this->setMonth(4);
-                $this->setDate(1);
+                $this->setMonth(Config::DEFAULT_MONTH);
+                $this->setDate(Config::DEFAULT_DATE);
             } else {
                 throw new \InvalidArgumentException("$wareki is not a valid format.");
             }
@@ -246,7 +246,7 @@
         public static function compare(Wareki $a, Wareki $b): int {
             $gengous = array_keys(self::GENGOU);
             $gengous = array_values($gengous);
-            $gengou = array_search($a->getGengou(), $gengous,true) <=> array_search($b->getGengou(), $gengous,true);
+            $gengou = array_search($a->getGengou(), $gengous, true) <=> array_search($b->getGengou(), $gengous, true);
             if ($gengou !== 0) {
                 return $gengou;
             }

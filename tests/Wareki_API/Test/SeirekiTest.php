@@ -2,6 +2,7 @@
 
     namespace Wareki_API\Test;
 
+    use Wareki_API\Config;
     use Wareki_API\Seireki;
     use Wareki_API\Wareki;
 
@@ -95,8 +96,8 @@
         function getter_年だけ() {
             $seireki = new Seireki("2018");
             self::assertEquals(2018, $seireki->getYear());
-            self::assertEquals(4, $seireki->getMonth());
-            self::assertEquals(1, $seireki->getDate());
+            self::assertEquals(Config::DEFAULT_MONTH, $seireki->getMonth());
+            self::assertEquals(Config::DEFAULT_DATE, $seireki->getDate());
         }
 
         /**
@@ -112,7 +113,10 @@
          */
         function toString_年だけ() {
             $seireki = new Seireki("2018");
-            self::assertEquals("2018-04-01", $seireki->__toString());
+            self::assertEquals(
+                "2018-" . str_pad(Config::DEFAULT_MONTH, 2, "0", STR_PAD_LEFT) .
+                "-" . str_pad(Config::DEFAULT_DATE, 2, "0", STR_PAD_LEFT), $seireki->__toString()
+            );
         }
 
         /**
