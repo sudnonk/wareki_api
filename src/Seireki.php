@@ -20,7 +20,7 @@
         public function __construct(string $seireki) {
             $m = [];
 
-            if (preg_match("/^(\d+)\-(\d{1,2})\-(\d{1,2})$/u", $seireki, $m) === 1) {//2018-04-01の形式で指定されたとき
+            if (preg_match("/^(\d+)-(\d{1,2})-(\d{1,2})$/u", $seireki, $m) === 1) {//2018-04-01の形式で指定されたとき
                 $this->setYear(intval($m[1]));
                 $this->setMonth(intval($m[2]));
                 $this->setDate(intval($m[3]));
@@ -92,7 +92,7 @@
         }
 
         public function __toString() {
-            return self::stringfy($this->getYear(), $this->getMonth(), $this->getDate());
+            return self::stringify($this->getYear(), $this->getMonth(), $this->getDate());
         }
 
         /**
@@ -102,7 +102,7 @@
          *
          * @return string
          */
-        private static function stringfy(int $year, int $month, int $date) {
+        private static function stringify(int $year, int $month, int $date) {
             return $year . "-" .
                 str_pad($month, 2, "0", STR_PAD_LEFT) . "-" .
                 str_pad($date, 2, "0", STR_PAD_LEFT);
@@ -114,15 +114,16 @@
          * @param Wareki $wareki
          *
          * @return Seireki
+         * @throws \InvalidArgumentException
          */
         public static function wareki2seireki(Wareki $wareki): Seireki {
             /** @var Seireki $start その元号が始まる西暦 */
-            $start = new Seireki(Wareki::GENGOU[$wareki->getGengou()][0]);
+            $start = new Seireki(Wareki::GENGOU[$wareki->getGengou()]["start"]);
 
             /** @var int $year その和暦の年を西暦にしたもの */
             $year = $start->getYear() + $wareki->getYear() - 1;
 
-            return new Seireki(self::stringfy($year, $wareki->getMonth(), $wareki->getDate()));
+            return new Seireki(self::stringify($year, $wareki->getMonth(), $wareki->getDate()));
         }
 
         /**

@@ -6,20 +6,25 @@
         /** @var array GENGOU 元号のリストとその終始 */
         public const GENGOU = [
             "明治" => [
-                "1868-01-25",
-                "1912-07-30",
+                "start" => "1868-01-25",
+                "end"   => "1912-07-30",
             ],
             "大正" => [
-                "1912-07-30",
-                "1926-12-25",
+                "start" => "1912-07-30",
+                "end"   => "1926-12-25",
             ],
             "昭和" => [
-                "1926-12-25",
-                "1989-01-07",
+                "start" => "1926-12-25",
+                "end"   => "1989-01-07",
             ],
             "平成" => [
-                "1989-01-08",
+                "start" => "1989-01-08",
+                "end"   => "2019-04-30"
             ],
+            "令和" => [
+                "start" => "2019-05-01",
+                "end"   => null
+            ]
         ];
 
         /** @var array DUPLICATE 二つの元号に属する日付。新しい方の元年とする */
@@ -40,7 +45,7 @@
         /**
          * Wareki constructor.
          *
-         * @param string $wareki
+         * @param string $wareki 元号YY年mm月dd日または元号YY年の形式。年しか指定しなかった場合はConfig::DEFAULT_MONTH月Config::DEFAULT_DATE日
          *
          * @throws \InvalidArgumentException
          */
@@ -139,10 +144,10 @@
         }
 
         public function __toString() {
-            return self::stringfy($this->getGengou(), $this->getYear(), $this->getMonth(), $this->getDate());
+            return self::stringify($this->getGengou(), $this->getYear(), $this->getMonth(), $this->getDate());
         }
 
-        private static function stringfy(string $gengou, int $year, int $month, int $date) {
+        private static function stringify(string $gengou, int $year, int $month, int $date) {
             return $gengou . $year . "年" . $month . "月" . $date . "日";
         }
 
@@ -232,7 +237,7 @@
             /** @var int $year その西暦がその元号で何年か */
             $year = $seireki->getYear() - $start_seireki->getYear() + 1;
 
-            return new Wareki(self::stringfy($gengou, $year, $seireki->getMonth(), $seireki->getDate()));
+            return new Wareki(self::stringify($gengou, $year, $seireki->getMonth(), $seireki->getDate()));
         }
 
         /**
